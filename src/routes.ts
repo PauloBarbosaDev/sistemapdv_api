@@ -1,11 +1,11 @@
 import express from 'express';
 import { categoriesController } from './controllers/categoriesController';
-import { usersController } from './controllers/usersController';
+import { authController } from './controllers/authController';
 
 const router = express.Router();
 
-router.get('/categories', categoriesController.getAllCategories);
+router.post('/auth/register', authController.register);
 
-router.post('/user', usersController.save);
+router.get('/categories', categoriesController.getAllCategories);
 
 export { router };
