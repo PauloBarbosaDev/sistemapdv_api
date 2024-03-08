@@ -21,7 +21,11 @@ export const userService = {
       returning: true,
     });
 
-    return updatedUsers[0];
+    return {
+      id: updatedUsers[0].id,
+      name: updatedUsers[0].name,
+      email: updatedUsers[0].email,
+    };
   },
 
   upatePassword: async (id: string | number, password: string) => {

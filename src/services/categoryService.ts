@@ -6,4 +6,9 @@ export const categoryService = {
 
     return categories;
   },
+  findCategoryById: async (id: string | number) => {
+    const category = await Category.findByPk(id);
+
+    return category;
+  },
 };
