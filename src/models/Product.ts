@@ -4,7 +4,7 @@ import { sequelize } from '../database';
 export interface Product {
   id: number;
   description: string;
-  quantity_stock: string;
+  quantity_stock: number;
   value: number;
   category_id: number;
 }
