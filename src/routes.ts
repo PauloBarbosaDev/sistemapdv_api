@@ -23,6 +23,8 @@ router.put('/user/password', ensureAuth, usersController.updatePassword);
 
 router.post('/product', ensureAuth, productController.save);
 
-router.put('/product/:id', productController.update);
+router.put('/product/:id', ensureAuth, productController.update);
+
+router.get('/products', ensureAuth, productController.getAllProducts);
 
 export { router };

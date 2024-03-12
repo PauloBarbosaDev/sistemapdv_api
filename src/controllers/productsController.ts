@@ -4,6 +4,17 @@ import { productService } from '../services/productService';
 import { categoryService } from '../services/categoryService';
 
 export const productController = {
+  getAllProducts: async (req: Request, res: Response) => {
+    try {
+      const products = await productService.findAllProducts();
+
+      return res.status(200).json(products);
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(400).json(error.message);
+      }
+    }
+  },
   save: async (req: AuthenticatedRequest, res: Response) => {
     const { description, quantity_stock, value, category_id } = req.body;
 

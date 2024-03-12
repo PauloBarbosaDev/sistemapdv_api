@@ -1,6 +1,11 @@
 import { Product, ProductCreationAttributes } from '../models/Product';
 
 export const productService = {
+  findAllProducts: async () => {
+    const products = await Product.findAll();
+
+    return products;
+  },
   create: async (product: ProductCreationAttributes) => {
     const newProduct = await Product.create(product);
 
