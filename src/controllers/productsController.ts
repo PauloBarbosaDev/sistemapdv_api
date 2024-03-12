@@ -93,4 +93,25 @@ export const productController = {
       }
     }
   },
+  delete: async (req: Request, res: Response) => {
+    const productId = +req.params.id;
+
+    try {
+      const productExist = await productService.findById(productId);
+
+      if (!productExist) {
+        return res
+          .status(404)
+          .json({ message: `Product ${productId} not found` });
+      }
+
+      await productService.deleteProductById(productId);
+
+      return res.status(204).send();
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(400).json(error.message);
+      }
+    }
+  },
 };

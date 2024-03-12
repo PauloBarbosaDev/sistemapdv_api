@@ -25,7 +25,9 @@ router.post('/product', ensureAuth, productController.save);
 
 router.put('/product/:id', ensureAuth, productController.update);
 
-router.get('/product/:id', productController.getProductById);
+router.get('/product/:id', ensureAuth, productController.getProductById);
+
+router.delete('/product/:id', ensureAuth, productController.delete);
 
 router.get('/products', ensureAuth, productController.getAllProducts);
 
