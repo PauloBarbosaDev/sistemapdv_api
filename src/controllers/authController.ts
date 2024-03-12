@@ -10,7 +10,7 @@ export const authController = {
       const userAlreadyExists = await userService.findByEmail(email);
 
       if (userAlreadyExists) {
-        throw new Error('Este email já está cadastrado.');
+        return res.status(400).json({ message: `Email já se encontra em uso` });
       }
 
       const user = await userService.create({ name, email, password });

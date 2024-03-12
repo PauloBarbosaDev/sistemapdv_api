@@ -34,4 +34,6 @@ router.get('/product', ensureAuth, productController.getAllProducts);
 
 router.post('/customer', ensureAuth, customerController.create);
 
+router.put('/customer/:id', ensureAuth, customerController.update);
+
 export { router };

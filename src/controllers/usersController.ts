@@ -21,7 +21,7 @@ export const usersController = {
       const user = await userService.findByEmail(email);
 
       if (user) {
-        return res.status(404).json({ message: `Email já se encontra em uso` });
+        return res.status(400).json({ message: `Email já se encontra em uso` });
       }
 
       const updateUser = await userService.update(id, {
