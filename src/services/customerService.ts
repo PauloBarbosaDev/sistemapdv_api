@@ -1,6 +1,11 @@
 import { Customer, CustomerCreationAttributes } from '../models/Customer';
 
 export const customerService = {
+  findAllCustomers: async () => {
+    const customers = await Customer.findAll({ order: [['id', 'ASC']] });
+
+    return customers;
+  },
   findByEmail: async (email: string) => {
     const customer = Customer.findOne({ where: { email } });
 

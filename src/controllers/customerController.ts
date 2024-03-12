@@ -83,4 +83,33 @@ export const customerController = {
       }
     }
   },
+  getAllCustomers: async (req: Request, res: Response) => {
+    try {
+      const customers = await customerService.findAllCustomers();
+
+      return res.status(200).json(customers);
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(400).json({ message: error.message });
+      }
+    }
+  },
+  getCustomerById: async (req: Request, res: Response) => {
+    const customerId = +req.params.id;
+    try {
+      const customer = await customerService.findById(customerId);
+
+      if (!customer) {
+        return res
+          .status(404)
+          .json({ message: `Customer ${customerId} not found` });
+      }
+
+      return res.status(200).json(customer);
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(400).json({ message: error.message });
+      }
+    }
+  },
 };
