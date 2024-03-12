@@ -4,6 +4,7 @@ import { authController } from './controllers/authController';
 import { usersController } from './controllers/usersController';
 import { ensureAuth } from './middlewares/auth';
 import { productController } from './controllers/productsController';
+import { customerController } from './controllers/customerController';
 
 const router = express.Router();
 
@@ -29,6 +30,8 @@ router.get('/product/:id', ensureAuth, productController.getProductById);
 
 router.delete('/product/:id', ensureAuth, productController.delete);
 
-router.get('/products', ensureAuth, productController.getAllProducts);
+router.get('/product', ensureAuth, productController.getAllProducts);
+
+router.post('/customer', ensureAuth, customerController.create);
 
 export { router };

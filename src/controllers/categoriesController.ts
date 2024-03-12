@@ -9,7 +9,7 @@ export const categoriesController = {
       return res.status(200).json(categories);
     } catch (error) {
       if (error instanceof Error) {
-        return res.status(400).json(error.message);
+        return res.status(400).json({ message: error.message });
       }
     }
   },
@@ -26,7 +26,7 @@ export const categoriesController = {
       return res.status(200).json(category);
     } catch (error) {
       if (error instanceof Error) {
-        return res.status(400).json(error.message);
+        return res.status(400).json({ message: error.message });
       }
     }
   },

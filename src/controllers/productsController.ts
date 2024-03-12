@@ -18,7 +18,7 @@ export const productController = {
       return res.status(200).json(product);
     } catch (error) {
       if (error instanceof Error) {
-        return res.status(400).json(error.message);
+        return res.status(400).json({ message: error.message });
       }
     }
   },
@@ -29,7 +29,7 @@ export const productController = {
       return res.status(200).json(products);
     } catch (error) {
       if (error instanceof Error) {
-        return res.status(400).json(error.message);
+        return res.status(400).json({ message: error.message });
       }
     }
   },
@@ -54,7 +54,7 @@ export const productController = {
       return res.status(201).json(product);
     } catch (error) {
       if (error instanceof Error) {
-        return res.status(400).json(error.message);
+        return res.status(400).json({ message: error.message });
       }
     }
   },
@@ -89,7 +89,7 @@ export const productController = {
       return res.status(200).json(updatedProduct);
     } catch (error) {
       if (error instanceof Error) {
-        return res.status(400).json(error.message);
+        return res.status(400).json({ message: error.message });
       }
     }
   },
@@ -110,7 +110,7 @@ export const productController = {
       return res.status(204).send();
     } catch (error) {
       if (error instanceof Error) {
-        return res.status(400).json(error.message);
+        return res.status(400).json({ message: error.message });
       }
     }
   },
