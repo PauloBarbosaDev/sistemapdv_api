@@ -25,6 +25,8 @@ router.post('/product', ensureAuth, productController.save);
 
 router.put('/product/:id', ensureAuth, productController.update);
 
+router.get('/product/:id', productController.getProductById);
+
 router.get('/products', ensureAuth, productController.getAllProducts);
 
 export { router };

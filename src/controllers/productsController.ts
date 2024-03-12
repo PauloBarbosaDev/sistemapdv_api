@@ -4,6 +4,24 @@ import { productService } from '../services/productService';
 import { categoryService } from '../services/categoryService';
 
 export const productController = {
+  getProductById: async (req: Request, res: Response) => {
+    const productId = +req.params.id;
+    try {
+      const product = await productService.findById(productId);
+
+      if (!product) {
+        return res
+          .status(404)
+          .json({ message: `Product ${productId} not found` });
+      }
+
+      return res.status(200).json(product);
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(400).json(error.message);
+      }
+    }
+  },
   getAllProducts: async (req: Request, res: Response) => {
     try {
       const products = await productService.findAllProducts();
