@@ -8,7 +8,7 @@
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "Paulo Afonso de Souza Barbosa",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "~5.0.1",
