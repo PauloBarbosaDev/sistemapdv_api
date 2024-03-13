@@ -2,7 +2,7 @@ import { Product, ProductCreationAttributes } from '../models/Product';
 
 export const productService = {
   findAllProducts: async () => {
-    const products = await Product.findAll();
+    const products = await Product.findAll({ order: [['id', 'ASC']] });
 
     return products;
   },

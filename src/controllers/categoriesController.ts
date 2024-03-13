@@ -18,7 +18,7 @@ export const categoriesController = {
     try {
       const category = await categoryService.findCategoryById(categoryId);
 
-      if (category === null)
+      if (!category)
         return res
           .status(404)
           .json({ message: `Category ${categoryId} not found` });

@@ -23,7 +23,22 @@ export const productController = {
     }
   },
   getAllProducts: async (req: Request, res: Response) => {
+    const { category_id } = req.query;
     try {
+      if (category_id) {
+        const products = await categoryService.getProductsByCategoryId(
+          +category_id
+        );
+
+        if (!products || products.length <= 0) {
+          return res
+            .status(404)
+            .json({ message: `Category ${category_id} not found` });
+        }
+
+        return res.status(200).json(products);
+      }
+
       const products = await productService.findAllProducts();
 
       return res.status(200).json(products);

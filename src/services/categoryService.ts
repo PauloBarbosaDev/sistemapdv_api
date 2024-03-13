@@ -1,4 +1,5 @@
 import { Category } from '../models';
+import { Product } from '../models/Product';
 
 export const categoryService = {
   findAllCategories: async () => {
@@ -10,5 +11,10 @@ export const categoryService = {
     const category = await Category.findByPk(id);
 
     return category;
+  },
+  getProductsByCategoryId: async (category_id: string | number) => {
+    const products = await Product.findAll({ where: { category_id } });
+
+    return products;
   },
 };
