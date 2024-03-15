@@ -18,11 +18,11 @@ module.exports = {
         onDelete: 'RESTRICT',
       },
       observation: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DataTypes.STRING,
       },
       total_value: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DataTypes.INTEGER,
       },
 

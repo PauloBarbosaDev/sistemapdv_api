@@ -59,7 +59,7 @@ export const productController = {
           .status(404)
           .json({ message: `Category ${category_id} not found` });
 
-      const product = await productService.create({
+      const product = await productService.save({
         description,
         quantity_stock,
         value,

@@ -6,7 +6,7 @@ export const productService = {
 
     return products;
   },
-  create: async (product: ProductCreationAttributes) => {
+  save: async (product: ProductCreationAttributes) => {
     const newProduct = await Product.create(product);
 
     return newProduct;

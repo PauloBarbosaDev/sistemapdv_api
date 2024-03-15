@@ -29,7 +29,7 @@ module.exports = {
         type: Sequelize.DataTypes.INTEGER,
       },
       value: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DataTypes.INTEGER,
       },
 

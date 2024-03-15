@@ -5,6 +5,7 @@ import { usersController } from './controllers/usersController';
 import { ensureAuth } from './middlewares/auth';
 import { productController } from './controllers/productsController';
 import { customerController } from './controllers/customerController';
+import { orderController } from './controllers/orderController';
 
 const router = express.Router();
 
@@ -39,5 +40,7 @@ router.put('/customer/:id', ensureAuth, customerController.update);
 router.get('/customer/:id', ensureAuth, customerController.getCustomerById);
 
 router.get('/customer', ensureAuth, customerController.getAllCustomers);
+
+router.post('/order', orderController.create);
 
 export { router };
