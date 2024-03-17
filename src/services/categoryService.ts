@@ -1,9 +1,32 @@
 import { Category } from '../models';
+import { CategoryCreationAttributes } from '../models/Category';
 import { Product } from '../models/Product';
 
 export const categoryService = {
+  save: async (category: CategoryCreationAttributes) => {
+    const newCategory = await Category.create(category);
+
+    return newCategory;
+  },
+
+  update: async (id: number, attributes: { description: string }) => {
+    const [effectedRows, updatedCategories] = await Category.update(
+      attributes,
+      {
+        where: { id },
+        returning: true,
+      }
+    );
+
+    return updatedCategories[0];
+  },
+
+  deleteCategoryById: async (id: number) => {
+    return await Category.destroy({ where: { id } });
+  },
+
   findAllCategories: async () => {
-    const categories = await Category.findAll();
+    const categories = await Category.findAll({ order: [['id', 'ASC']] });
 
     return categories;
   },

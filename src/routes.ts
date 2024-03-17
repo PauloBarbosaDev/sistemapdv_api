@@ -13,6 +13,12 @@ router.post('/auth/register', authController.register);
 
 router.post('/auth/login', authController.login);
 
+router.post('/categories', ensureAuth, categoriesController.create);
+
+router.put('/categories/:id', ensureAuth, categoriesController.update);
+
+router.delete('/categories/:id', ensureAuth, categoriesController.delete);
+
 router.get('/categories/:id', categoriesController.getCategoryById);
 
 router.get('/categories', categoriesController.getAllCategories);
@@ -42,5 +48,7 @@ router.get('/customer/:id', ensureAuth, customerController.getCustomerById);
 router.get('/customer', ensureAuth, customerController.getAllCustomers);
 
 router.post('/order', orderController.create);
+
+router.get('/order', ensureAuth, orderController.getAllOrders);
 
 export { router };

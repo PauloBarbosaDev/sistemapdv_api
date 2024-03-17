@@ -33,6 +33,6 @@ export const productService = {
     return product;
   },
   deleteProductById: async (id: number | string) => {
-    await Product.destroy({ where: { id } });
+    return await Product.destroy({ where: { id } });
   },
 };

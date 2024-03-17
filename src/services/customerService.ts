@@ -1,6 +1,13 @@
+import { Order } from '../models';
 import { Customer, CustomerCreationAttributes } from '../models/Customer';
 
 export const customerService = {
+  getOrdersByCustomerId: async (customer_id: string | number) => {
+    const orders = await Order.findAll({ where: { customer_id } });
+
+    return orders;
+  },
+
   findAllCustomers: async () => {
     const customers = await Customer.findAll({ order: [['id', 'ASC']] });
 

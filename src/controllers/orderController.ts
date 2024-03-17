@@ -67,4 +67,31 @@ export const orderController = {
       }
     }
   },
+  getAllOrders: async (req: Request, res: Response) => {
+    const { customer_id } = req.query;
+
+    try {
+      if (customer_id) {
+        const orders = await customerService.getOrdersByCustomerId(
+          +customer_id
+        );
+
+        if (!orders || orders.length <= 0) {
+          return res
+            .status(404)
+            .json({ message: `Customer ${customer_id} not found` });
+        }
+
+        return res.status(200).json(orders);
+      }
+
+      const order = await orderService.findAllOrders();
+
+      return res.status(200).json(order);
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(400).json({ message: error.message });
+      }
+    }
+  },
 };

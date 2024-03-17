@@ -5,7 +5,11 @@ import { User } from './User';
 import { Order } from './Order';
 import { OrderProducts } from './OrderProducts';
 
-Category.hasMany(Product);
-Product.belongsTo(Category);
+Order.hasMany(OrderProducts, { foreignKey: 'order_id' });
+
+OrderProducts.belongsTo(Order, { foreignKey: 'order_id' });
+OrderProducts.belongsTo(Product, { foreignKey: 'product_id' });
+
+Product.hasMany(OrderProducts, { foreignKey: 'product_id' });
 
 export { Category, Customer, Product, User, Order, OrderProducts };
