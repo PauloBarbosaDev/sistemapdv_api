@@ -29,6 +29,10 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'RESTRICT',
       },
+      image: {
+        allowNull: true,
+        type: Sequelize.DataTypes.TEXT,
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DataTypes.DATE,

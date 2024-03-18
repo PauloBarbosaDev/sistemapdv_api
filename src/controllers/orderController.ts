@@ -3,6 +3,9 @@ import { customerService } from '../services/customerService';
 import { productService } from '../services/productService';
 import { orderService } from '../services/orderService';
 import { orderProductsService } from '../services/orderProductsService';
+import { emailService } from '../services/emailService';
+import path = require('path');
+import { htmlCompiler } from '../utils/htmlCompiler';
 
 type OrderRequestProductsAttributes = {
   product_id: number;
@@ -59,6 +62,17 @@ export const orderController = {
           value: products.value,
         });
       }
+
+      const htmlPath = path.join(__dirname, '../template/email.html');
+      const html = await htmlCompiler(htmlPath, {
+        name: customerExist.name,
+      });
+
+      emailService.sendEmail(
+        `${customerExist.name} <${customerExist.email}>`,
+        'Cofirmação de conclusão de pedido',
+        html
+      );
 
       return res.status(201).json(order);
     } catch (error) {

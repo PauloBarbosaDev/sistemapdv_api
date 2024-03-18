@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seu Título</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f2f2f2;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #007bff;
+      }
+      p {
+        color: #333333;
+      }
+
+      @media only screen and (max-width: 600px) {
+        .container {
+          width: 100%;
+          border-radius: 0;
+          box-shadow: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Sistema PDV Paulo Barbosa</h1>
+      <p>Olá,{{name}}</p>
+      <p>Aviso de pedido criado com sucesso!</p>
+
+      <p>Atenciosamente,<br />Paulo Barbosa</p>
+    </div>
+  </body>
+</html>
