@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { AuthenticatedRequest } from '../middlewares/auth';
 import { productService } from '../services/productService';
 import { categoryService } from '../services/categoryService';
+import { orderProductsService } from '../services/orderProductsService';
 
 export const productController = {
   getProductById: async (req: Request, res: Response) => {
@@ -118,6 +119,16 @@ export const productController = {
         return res
           .status(404)
           .json({ message: `Product ${productId} not found` });
+      }
+
+      const productInOrder = await orderProductsService.getProductInOrder(
+        productId
+      );
+
+      if (productInOrder) {
+        return res.status(400).json({
+          message: `Unable to delete the product as it's linked to an order.`,
+        });
       }
 
       await productService.deleteProductById(productId);

@@ -9,4 +9,11 @@ export const orderProductsService = {
 
     return newOrderProducts;
   },
+  getProductInOrder: async (productId: number) => {
+    const newOrderProducts = await OrderProducts.findOne({
+      where: { product_id: productId },
+    });
+
+    return newOrderProducts;
+  },
 };
