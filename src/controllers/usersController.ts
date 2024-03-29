@@ -21,7 +21,7 @@ export const usersController = {
       const user = await userService.findByEmail(email);
 
       if (user) {
-        return res.status(400).json({ message: `Email já se encontra em uso` });
+        return res.status(400).json({ message: `Email is already in use.` });
       }
 
       const updateUser = await userService.update(id, {
@@ -41,7 +41,7 @@ export const usersController = {
     const { currentPassword, newPassword } = req.body;
 
     if (!user) {
-      return res.status(401).json({ message: `Não autorizado` });
+      return res.status(401).json({ message: `Unauthorized` });
     }
 
     try {
@@ -51,7 +51,7 @@ export const usersController = {
         }
 
         if (!isSame) {
-          return res.status(400).json({ message: `Senha incorreta` });
+          return res.status(400).json({ message: `Incorrect password` });
         }
 
         await userService.upatePassword(user.id, newPassword);

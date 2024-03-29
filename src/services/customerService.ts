@@ -1,10 +1,19 @@
-import { Order } from '../models';
+import { Order, OrderProducts } from '../models';
 import { Customer, CustomerCreationAttributes } from '../models/Customer';
 
 export const customerService = {
   getOrdersByCustomerId: async (customer_id: string | number) => {
-    const orders = await Order.findAll({ where: { customer_id } });
-
+    const orders = await Order.findAll({
+      where: { customer_id },
+      attributes: ['id', 'total_value', 'observation', 'customer_id'],
+      include: [
+        {
+          model: OrderProducts,
+          attributes: ['id', 'quantity', 'value', 'order_id', 'product_id'],
+        },
+      ],
+      order: [['id', 'ASC']],
+    });
     return orders;
   },
 

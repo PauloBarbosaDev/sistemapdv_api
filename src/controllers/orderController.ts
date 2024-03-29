@@ -11,6 +11,7 @@ type OrderRequestProductsAttributes = {
   product_id: number;
   quantity: number;
   value?: number;
+  totalValue?: number;
 };
 
 export const orderController = {
@@ -39,12 +40,13 @@ export const orderController = {
             message: `The requested quantity of the product with ID: ${products.product_id} exceeds the available stock quantity. `,
           });
         }
-        products.value = productExist.value * products.quantity;
+        products.value = productExist.value;
+        products.totalValue = productExist.value * products.quantity;
       }
 
       const totalValue: number = order_products.reduce(
         (totalValue: number, currentValue: OrderRequestProductsAttributes) =>
-          totalValue + currentValue.value!,
+          totalValue + currentValue.totalValue!,
         0
       );
 

@@ -16,18 +16,14 @@ export function ensureAuth(
   const authorizationHeader = req.headers.authorization;
 
   if (!authorizationHeader) {
-    return res
-      .status(401)
-      .json({ message: `Não autorizado: nenhum token encontrado` });
+    return res.status(401).json({ message: `Unauthorized: no token found` });
   }
 
   const token = authorizationHeader.replace(/Bearer /, '');
 
   jwtService.verifyToken(token, async (err, decoded) => {
     if (err || typeof decoded === 'undefined') {
-      return res
-        .status(401)
-        .json({ message: `Não autorizado: token inválido` });
+      return res.status(401).json({ message: `Unauthorized: invalid token` });
     }
 
     const user = await userService.findByEmail((decoded as JwtPayload).email);

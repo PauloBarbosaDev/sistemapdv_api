@@ -10,7 +10,7 @@ export const authController = {
       const userAlreadyExists = await userService.findByEmail(email);
 
       if (userAlreadyExists) {
-        return res.status(400).json({ message: `Email já se encontra em uso` });
+        return res.status(400).json({ message: `Email is already in use.` });
       }
 
       const user = await userService.create({ name, email, password });
@@ -28,13 +28,15 @@ export const authController = {
       const user = await userService.findByEmail(email);
 
       if (!user) {
-        return res.status(404).json({ message: `Email não registrado` });
+        return res.status(404).json({ message: `Email not registered` });
       }
 
       user.checkPassword(password, (err, isSame) => {
         if (err) return res.status(400).json({ message: err.message });
         if (!isSame)
-          return res.status(401).json({ message: `Senha incorreta` });
+          return res
+            .status(401)
+            .json({ message: `invalid email and/or password` });
 
         const payLoad = {
           id: user.id,

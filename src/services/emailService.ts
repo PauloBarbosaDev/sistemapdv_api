@@ -13,12 +13,11 @@ export const emailService = {
   sendEmail: async (to: string, subject: string, html: string) => {
     try {
       transporter.sendMail({
-        from: '"Paulo" <paulo_barbosa_outlook.com>',
+        from: '"Paulo" <testeEmail.com>',
         to,
         subject,
         html,
       });
-      console.log('E-mail enviado com sucesso!');
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);

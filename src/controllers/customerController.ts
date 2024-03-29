@@ -10,13 +10,13 @@ export const customerController = {
       const customerExist = await customerService.findByEmail(email);
 
       if (customerExist) {
-        return res.status(400).json({ message: `Email já se encontra em uso` });
+        return res.status(400).json({ message: `Email is already in use.` });
       }
 
       const cpfExist = await customerService.findByCpf(cpf);
 
       if (cpfExist) {
-        return res.status(400).json({ message: `Cpf já se encontra em uso` });
+        return res.status(400).json({ message: `CPF already in use.` });
       }
 
       const customer = await customerService.save({
@@ -55,13 +55,13 @@ export const customerController = {
       const customerCadastredEmail = await customerService.findByEmail(email);
 
       if (customerCadastredEmail) {
-        return res.status(400).json({ message: `Email já se encontra em uso` });
+        return res.status(400).json({ message: `Email is already in use.` });
       }
 
       const cpfExist = await customerService.findByCpf(cpf);
 
       if (cpfExist) {
-        return res.status(400).json({ message: `Cpf já se encontra em uso` });
+        return res.status(400).json({ message: `CPF already in use.` });
       }
 
       const alteredCustomer = await customerService.update(customerId, {
