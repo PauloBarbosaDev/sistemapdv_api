@@ -6,12 +6,19 @@ import { ensureAuth } from './middlewares/auth';
 import { productController } from './controllers/productsController';
 import { customerController } from './controllers/customerController';
 import { orderController } from './controllers/orderController';
+import loginSchema from './validation/loginSchema';
+import validationBody from './middlewares/validateBody';
+import userSchema from './validation/userSchema';
 
 const router = express.Router();
 
-router.post('/auth/register', authController.register);
+router.post(
+  '/auth/register',
+  validationBody(userSchema),
+  authController.register
+);
 
-router.post('/auth/login', authController.login);
+router.post('/auth/login', validationBody(loginSchema), authController.login);
 
 router.post('/categories', categoriesController.create);
 
