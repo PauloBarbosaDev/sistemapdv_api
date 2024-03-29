@@ -6,9 +6,12 @@ import { ensureAuth } from './middlewares/auth';
 import { productController } from './controllers/productsController';
 import { customerController } from './controllers/customerController';
 import { orderController } from './controllers/orderController';
-import loginSchema from './validation/loginSchema';
+import loginSchema from './validation/authSchema';
 import validationBody from './middlewares/validateBody';
 import userSchema from './validation/userSchema';
+import categoriesSchema from './validation/categoriesSchema';
+import productSchema from './validation/productsSchema';
+import orderSchema from './validation/orderSchema';
 
 const router = express.Router();
 
@@ -20,7 +23,11 @@ router.post(
 
 router.post('/auth/login', validationBody(loginSchema), authController.login);
 
-router.post('/categories', categoriesController.create);
+router.post(
+  '/categories',
+  validationBody(categoriesSchema),
+  categoriesController.create
+);
 
 router.put('/categories/:id', categoriesController.update);
 
@@ -36,7 +43,7 @@ router.put('/user', usersController.update);
 
 router.put('/user/password', usersController.updatePassword);
 
-router.post('/product', productController.save);
+router.post('/product', validationBody(productSchema), productController.save);
 
 router.put('/product/:id', productController.update);
 
@@ -54,7 +61,7 @@ router.get('/customer/:id', customerController.getCustomerById);
 
 router.get('/customer', customerController.getAllCustomers);
 
-router.post('/order', orderController.create);
+router.post('/order', validationBody(orderSchema), orderController.create);
 
 router.get('/order', orderController.getAllOrders);
 
