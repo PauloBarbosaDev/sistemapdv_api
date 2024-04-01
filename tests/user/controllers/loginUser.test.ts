@@ -54,8 +54,8 @@ describe('Login User Controller', () => {
 
     await loginUser(logedUser);
 
-    expect(response.status).toBe(404);
-    expect(response.body).toHaveProperty('message', 'Email not registered');
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual({ mensagem: 'email must be a valid email' });
   });
 
   it('Some request field missing', async () => {
@@ -64,9 +64,6 @@ describe('Login User Controller', () => {
     await loginUser(logedUser);
 
     expect(response.status).toBe(400);
-    expect(response.body).toHaveProperty(
-      'message',
-      'data and hash arguments required'
-    );
+    expect(response.body).toEqual({ mensagem: 'password is a required field' });
   });
 });

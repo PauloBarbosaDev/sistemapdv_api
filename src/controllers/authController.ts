@@ -28,7 +28,7 @@ export const authController = {
       const user = await userService.findByEmail(email);
 
       if (!user) {
-        return res.status(404).json({ message: `Email not registered` });
+        return res.status(400).json({ message: `Email not registered` });
       }
 
       user.checkPassword(password, (err, isSame) => {

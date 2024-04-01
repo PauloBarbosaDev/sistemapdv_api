@@ -43,9 +43,7 @@ describe('Create User Controller', () => {
     await createUser(user);
 
     expect(response.status).toBe(400);
-    expect(response.body).toEqual(
-      'Validation error: Validation isEmail on email failed'
-    );
+    expect(response.body).toEqual({ mensagem: 'email must be a valid email' });
   });
 
   it('Some request field missing', async () => {
@@ -54,8 +52,6 @@ describe('Create User Controller', () => {
     await createUser(user);
 
     expect(response.status).toBe(400);
-    expect(response.body).toEqual(
-      'notNull Violation: User.password cannot be null'
-    );
+    expect(response.body).toEqual({ mensagem: 'password is a required field' });
   });
 });
