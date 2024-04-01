@@ -44,7 +44,10 @@ export const authController = {
           email: user.email,
         };
 
-        const token = jwtService.generateToken(payLoad, '1d');
+        const token = jwtService.generateToken(
+          payLoad,
+          process.env.JWT_EXPIRES || '1d'
+        );
 
         return res.status(200).json({ authenticated: true, ...payLoad, token });
       });
