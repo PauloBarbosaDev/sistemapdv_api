@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
+import jwtPassword from '../jwt/jwtPassword';
 
-const secretKey = 'chave';
+const secretKey = jwtPassword;
 
 export const jwtService = {
   generateToken: (payload: string | object | Buffer, expiration: string) => {
