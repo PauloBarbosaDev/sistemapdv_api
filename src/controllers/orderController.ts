@@ -68,6 +68,8 @@ export const orderController = {
       const htmlPath = path.join(__dirname, '../template/email.html');
       const html = await htmlCompiler(htmlPath, {
         name: customerExist.name,
+        emailName: process.env.EMAIL_NAME,
+        emailFrom: process.env.EMAIL_FROM,
       });
 
       emailService.sendEmail(

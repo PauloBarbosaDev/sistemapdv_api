@@ -1,11 +1,11 @@
 import nodemailer, { Transporter } from 'nodemailer';
 
 const transporter: Transporter = nodemailer.createTransport({
-  host: 'sandbox.smtp.mailtrap.io',
-  port: 2525,
+  host: process.env.EMAIL_HOST,
+  port: parseInt(process.env.EMAIL_PORT || '2525'),
   auth: {
-    user: 'ab2aa20d7639d0',
-    pass: 'a13aba47fc2446',
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
   },
 });
 
@@ -13,7 +13,7 @@ export const emailService = {
   sendEmail: async (to: string, subject: string, html: string) => {
     try {
       transporter.sendMail({
-        from: '"Paulo" <testeEmail.com>',
+        from: `${process.env.EMAIL_NAME} <${process.env.EMAIL_FROM}>`,
         to,
         subject,
         html,
