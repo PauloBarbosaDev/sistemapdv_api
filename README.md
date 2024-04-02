@@ -174,7 +174,3 @@ pnpm dev
 #
 
 **_Agradecemos pela sua contribuição e esperamos trabalhar juntos para tornar o SistemaPDV ainda melhor. Se você tiver alguma dúvida ou precisar de ajuda, não hesite em entrar em contato conosco. Juntos, podemos criar uma aplicação mais robusta e eficiente._**
-
-```
-
-```
