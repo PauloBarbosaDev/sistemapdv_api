@@ -27,6 +27,16 @@ O **Sistema PDV** uma aplicação **RESTful** que permite **gerenciar** um ponto
 
 Para usar a API, é **necessário** autenticar-se. Você deve obter um **token JWT válido** através do **endpoint de login** antes de acessar outros recursos. O token JWT deve ser incluído no **cabeçalho de autorização** de **todas** as solicitações subsequentes.
 
+## 📃 Funcionalidades
+
+O **sistema** oferece as seguintes funcionalidades:
+
+**Usuários**: Cadastro, atualização, detalhamento do usuário logado, exclusão.
+**Categorias**: Cadastro, atualização, detalhamento de todas as categorias, detalhamento de uma categoria, exclusão.
+**Clientes**: Cadastro, atualização, detalhamento de todos os clientes, detalhamento de um cliente, exclusão.
+**Pedidos**: Criar,obter todos os pedidos.
+**Produtos**: Cadastro, atualização, detalhamento de todos os produtos, detalhamento de um produto, exclusão.
+
 ## 📃 Documentação da Aplicação
 
 A seguir, temos o link da **documentação oficial** da nossa aplicação no **Swagger**:
