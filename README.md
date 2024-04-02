@@ -7,15 +7,22 @@ O **Sistema PDV** uma aplicação **RESTful** que permite **gerenciar** um ponto
 
 <div align='center'>
     <img align='center' height='50' width='70' title='TypeScript' alt='typescript' src='https://github.com/devicons/devicon/blob/master/icons/typescript/typescript-original.svg' />
+    <img align='center' height='50' width='70' title='Node' alt='node' src='https://github.com/devicons/devicon/blob/master/icons/nodejs/nodejs-plain-wordmark.svg' />
+    <img align='center' height='50' width='70' title='Postgresql' alt='postgresql' src='https://github.com/devicons/devicon/blob/master/icons/postgresql/postgresql-original.svg' />
     <img align='center' height='50' width='70' title='Npm' alt='npm' src='https://github.com/devicons/devicon/blob/master/icons/npm/npm-original-wordmark.svg' />
     <img align='center' height='55' width='70' title='Sequelize ORM' alt='sequelize' src='https://github.com/devicons/devicon/blob/master/icons/sequelize/sequelize-original.svg' />
+    <img align='center' height='55' width='70' title='Handlebars' alt='handlebars' src='https://github.com/devicons/devicon/blob/master/icons/handlebars/handlebars-original.svg' />
     <img align='center' height='54' width='68' title='Jest' alt='jest' src='https://github.com/devicons/devicon/blob/master/icons/jest/jest-plain.svg' /> &nbsp;
     <img align='center' height='49' width='49' title='Express' alt='express' src='https://github.com/bush1D3v/solid_rest_api/assets/133554156/ba645c20-1f19-4914-8ad0-de6c7f83ba2e' /> &nbsp;
     <img align='center' height='48' width='48' title='Cors' alt='cors' src='https://github.com/bush1D3v/101acessorios_api/assets/133554156/3b4cccec-065e-428a-a663-1c5939404c1a' /> &nbsp;
     <img align='center' height='48' width='48' title='Dotenv' alt='dotenv' src='https://github.com/bush1D3v/my_portfolio/assets/133554156/432ec521-c94a-4f24-964e-f62658d04581' /> &nbsp;
     <img align='center' height='53' width='55' title='JsonWebToken' alt='jsonwebtoken' src='https://github.com/bush1D3v/solid_rest_api/assets/133554156/d23ffb9d-aedc-4d68-9209-7268d7f41ce6' /> &nbsp;
     <img align='center' height='48' width='48' title='Bcrypt' alt='bcrypt' src='https://github.com/bush1D3v/solid_rest_api/assets/133554156/5863bac1-a591-4776-82a4-f427681934be' /> &nbsp;
+      <img align='center' height='48' width='48' title='Insomnia' alt='insomnia' src='https://github.com/devicons/devicon/blob/master/icons/insomnia/insomnia-original.svg' /> &nbsp;
+        <img align='center' height='48' width='48' title='Beekeeper' alt='beekeeper' src='https://github.com/bush1D3v/solid_rest_api/assets/133554156/5863bac1-a591-4776-82a4-f427681934be' /> &nbsp;
+
     <img align='center' height='60' width='70' title='Swagger' alt='swagger' src='https://github.com/bush1D3v/tsbank_api/assets/133554156/6739401f-d03b-47f8-b01f-88da2a9075d1' />
+
 </div>
 
 ## 🔏 Autenticação
