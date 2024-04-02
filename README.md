@@ -31,11 +31,11 @@ Para usar a API, é **necessário** autenticar-se. Você deve obter um **token J
 
 O **sistema** oferece as seguintes funcionalidades:
 
-**Usuários**: Cadastro, atualização, detalhamento do usuário logado, exclusão.
-**Categorias**: Cadastro, atualização, detalhamento de todas as categorias, detalhamento de uma categoria, exclusão.
-**Clientes**: Cadastro, atualização, detalhamento de todos os clientes, detalhamento de um cliente, exclusão.
-**Pedidos**: Criar,obter todos os pedidos.
-**Produtos**: Cadastro, atualização, detalhamento de todos os produtos, detalhamento de um produto, exclusão.
+- **Usuários**: Cadastro, atualização, detalhamento do usuário logado, exclusão.
+- **Categorias**: Cadastro, atualização, detalhamento de todas as categorias, detalhamento de uma categoria, exclusão.
+- **Clientes**: Cadastro, atualização, detalhamento de todos os clientes, detalhamento de um cliente, exclusão.
+- **Pedidos**: Criar, obter todos os pedidos.
+- **Produtos**: Cadastro, atualização, detalhamento de todos os produtos, detalhamento de um produto, exclusão.
 
 ## 📃 Documentação da Aplicação
 
