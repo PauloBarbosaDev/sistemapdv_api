@@ -1,7 +1,7 @@
 🛒 Sistema PDV
 
 🔍 Sobre o Projeto
-O **Sistema PDV** é uma aplicação é uma aplicação **RESTful** que permite **gerenciar** um ponto de venda, oferecendo funcionalidades de **autenticação**, gerenciamento de **usuários**, **categorias**, **clientes**, **pedidos** e **produtos**.
+O **Sistema PDV** uma aplicação **RESTful** que permite **gerenciar** um ponto de venda, oferecendo funcionalidades de **autenticação**, gerenciamento de **usuários**, **categorias**, **clientes**, **pedidos** e **produtos**.
 
 🛠️ Tecnologias e Ferramentas Utilizadas
 
