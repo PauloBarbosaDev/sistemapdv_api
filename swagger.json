@@ -1,0 +1,1498 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "PDV API Documentation",
+    "description": "Welcome to the PDV API Documentation! Here, you will find comprehensive information about the API's endpoints and how to utilize them. Explore the available routes and test their functionality. Don't forget to register and complete the authorization process to unlock the full potential of the API.",
+    "contact": {
+      "email": "pauloabarbosa.dev@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://sistemapdv-0tm2.onrender.com/",
+      "description": "Web Server"
+    },
+    {
+      "url": "http://localhost:3001",
+      "description": "Local Server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Authentication"
+    },
+    {
+      "name": "User"
+    },
+    {
+      "name": "Category"
+    },
+    {
+      "name": "Product"
+    },
+    {
+      "name": "Customer"
+    }
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "summary": "User Login",
+        "tags": [
+          "Authentication"
+        ],
+        "description": "This endpoint allows users to authenticate to the application using their credentials. By submitting a valid email and password, the user will receive an access token to use in other parts of the API.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginBody"
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "email": "paulobarbosa@gmail.com",
+                    "password": "pdv123456"
+                  }
+                },
+                "Example 2": {
+                  "value": {
+                    "email": "testepdv@example.com",
+                    "password": "123456pdv"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "username or password is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "summary": "Register user",
+        "tags": [
+          "User"
+        ],
+        "description": "This endpoint allows you to register a new user in the application. Users can provide personal information such as name, email address and password to create an account.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioBody"
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "name": "Pdv Teste",
+                    "email": "pdvtest@email.com",
+                    "password": "pdv123456"
+                  }
+                },
+                "Example 2": {
+                  "value": {
+                    "name": "Teste Pdv",
+                    "email": "testepdv@example.com",
+                    "senha": "123456pdv"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User registered successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "username or password is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error409"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "summary": "Detail user",
+        "tags": [
+          "User"
+        ],
+        "description": "This endpoint allows you to detail the user logged into the application.",
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detail user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsuarioResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update user",
+        "tags": [
+          "User"
+        ],
+        "description": "This endpoint allows you to update a user in the application. Users can update personal information such as name, email address and password.",
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioBody"
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "name": "Pdv Teste",
+                    "email": "pdvtest@email.com",
+                    "senha": "pdv123456"
+                  }
+                },
+                "Example 2": {
+                  "value": {
+                    "name": "Teste Pdv",
+                    "email": "testepdv@example.com",
+                    "senha": "123456pdv"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Data conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error409"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categories": {
+      "get": {
+        "summary": "List categories",
+        "tags": [
+          "Category"
+        ],
+        "description": "This endpoint allows you to list all categories registered in the application.",
+        "responses": {
+          "200": {
+            "description": "Category list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoriaResponse"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Category not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product": {
+      "post": {
+        "summary": "Register Product",
+        "tags": [
+          "Product"
+        ],
+        "description": "This endpoint allows you to register a new product in the application. Users can provide product information such as name, description, price and category id.",
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "requestBody": {
+          "description": "Values must be entered in cents",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProdutoBody"
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "name": "Produto Teste 01",
+                    "description": "Product Detail Teste 01",
+                    "value": 100000,
+                    "category_id": 1
+                  }
+                },
+                "Example 2": {
+                  "value": {
+                    "name": "Produto Teste 02",
+                    "description": "Product Detail Teste 02",
+                    "value": 150000,
+                    "category_id": 2
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Product registered successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProdutoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Data conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error409"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "List Products",
+        "tags": [
+          "Product"
+        ],
+        "description": "This endpoint allows you to list all products registered in the application.",
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProdutoResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Product not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/:id": {
+      "get": {
+        "summary": "List Product",
+        "tags": [
+          "Product"
+        ],
+        "description": "This endpoint allows you to list a specific product in the application.",
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Product ID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProdutoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update Product",
+        "tags": [
+          "Product"
+        ],
+        "description": "This endpoint allows you to update a specific product in the application.",
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Product ID"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProdutoBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProdutoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Data conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error409"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Product",
+        "tags": [
+          "Product"
+        ],
+        "description": "This endpoint allows you to delete a specific product in the application.",
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Product ID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProdutoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer": {
+      "post": {
+        "summary": "Register Customer",
+        "tags": [
+          "Customer"
+        ],
+        "description": "This endpoint allows you to register a customer in the application.",
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClienteBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Registered customer",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClienteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Data conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error409"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "List Customers",
+        "tags": [
+          "Customer"
+        ],
+        "description": "This endpoint allows you to list all customers registered in the application.",
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClienteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/{id}": {
+      "put": {
+        "summary": "Update Customer",
+        "tags": [
+          "Customer"
+        ],
+        "description": "This endpoint allows you to update a specific customer in the application.",
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Customer ID"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClienteBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated customer",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClienteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Data conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error409"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Customer",
+        "tags": [
+          "Customer"
+        ],
+        "description": "This endpoint allows you to delete a specific customer in the application.",
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Customer ID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClienteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LoginBody": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User email",
+            "example": "usuario@Example.com"
+          },
+          "senha": {
+            "type": "string",
+            "description": "User password",
+            "example": "password"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "User ID",
+                "example": 1
+              },
+              "name": {
+                "type": "string",
+                "description": "User name",
+                "example": "Pdv Teste"
+              },
+              "email": {
+                "type": "string",
+                "description": "User email",
+                "example": "pdvtest@email.com"
+              }
+            },
+            "description": "User info"
+          },
+          "token": {
+            "type": "string",
+            "description": "Access Token",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjY1LCJuYW1lIjoiUEFVTE8iLCJlbWFpbCI6InRlc3RlMUBob3RtYWlsLmNvbSIsImlhdCI6MTcxMjEwMDEyMywiZXhwIjoxNzEyMTg2NTIzfQ.L9jRf71efkNUb9W7-nt0pQ6u5DrhwA7-1KhgBARN4Ds"
+          }
+        },
+        "description": "Successful login response"
+      },
+      "UsuarioBody": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Username",
+            "example": "Pdv Teste"
+          },
+          "email": {
+            "type": "string",
+            "description": "User email",
+            "example": "pdvtest@email.com"
+          },
+          "senha": {
+            "type": "string",
+            "description": "User password",
+            "example": "pdv123456"
+          }
+        },
+        "required": [
+          "name",
+          "email",
+          "password"
+        ]
+      },
+      "UsuarioResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "User ID",
+            "example": 6
+          },
+          "name": {
+            "type": "string",
+            "description": "Username",
+            "example": "Pdv Teste"
+          },
+          "email": {
+            "type": "string",
+            "description": "User email",
+            "example": "pdvtest@email.com"
+          }
+        },
+        "description": "User Detail"
+      },
+      "CategoriaResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Category ID",
+            "example": 6
+          },
+          "name": {
+            "type": "string",
+            "description": "Category name",
+            "example": "Pdv"
+          }
+        },
+        "description": "Category detail"
+      },
+      "ProdutoBody": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Product name",
+            "example": "Produto Teste"
+          },
+          "description": {
+            "type": "string",
+            "description": "Product description",
+            "example": "Produto Teste"
+          },
+          "value": {
+            "type": "number",
+            "description": "Product Price in cents",
+            "example": 100
+          },
+          "category_id": {
+            "type": "integer",
+            "description": "Category ID",
+            "example": 6
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "value",
+          "category_id"
+        ]
+      },
+      "ProdutoResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Product ID",
+            "example": 6
+          },
+          "name": {
+            "type": "string",
+            "description": "Product name",
+            "example": "Produto Teste"
+          },
+          "description": {
+            "type": "string",
+            "description": "Product Detail",
+            "example": "Produto Teste"
+          },
+          "value": {
+            "type": "number",
+            "description": "Product price",
+            "example": 100
+          },
+          "category": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "Category ID",
+                "example": 6
+              },
+              "name": {
+                "type": "string",
+                "description": "Category name",
+                "example": "Pdv"
+              }
+            },
+            "description": "Category detail"
+          }
+        },
+        "description": "Product description"
+      },
+      "ClienteBody": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Customer name",
+            "example": "Cliente Teste"
+          },
+          "email": {
+            "type": "string",
+            "description": "Customer email",
+            "example": "email@email.com"
+          },
+          "cpf": {
+            "type": "string",
+            "description": "Customer CPF",
+            "example": "123.456.789-00"
+          },
+          "cep": {
+            "type": "string",
+            "description": "CEP do cliente",
+            "example": "12345678"
+          },
+          "rua": {
+            "type": "string",
+            "description": "Rua do cliente",
+            "example": "Rua Teste"
+          },
+          "numero": {
+            "type": "string",
+            "description": "Número do cliente",
+            "example": "123"
+          },
+          "bairro": {
+            "type": "string",
+            "description": "Bairro do cliente",
+            "example": "Bairro Teste"
+          },
+          "cidade": {
+            "type": "string",
+            "description": "Cidade do cliente",
+            "example": "Cidade Teste"
+          },
+          "estado": {
+            "type": "string",
+            "description": "Estado do cliente",
+            "example": "Estado Teste"
+          }
+        },
+        "required": [
+          "name",
+          "email",
+          "cpf"
+        ]
+      },
+      "ClienteResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID do cliente",
+            "example": 6
+          },
+          "name": {
+            "type": "string",
+            "description": "name do cliente",
+            "example": "Cliente Teste"
+          },
+          "email": {
+            "type": "string",
+            "description": "E-mail do cliente",
+            "example": "email@email.com"
+          },
+          "cpf": {
+            "type": "string",
+            "description": "CPF do cliente",
+            "example": "123.456.789-00"
+          },
+          "cep": {
+            "type": "string",
+            "description": "CEP do cliente",
+            "example": "12345678"
+          },
+          "rua": {
+            "type": "string",
+            "description": "Rua do cliente",
+            "example": "Rua Teste"
+          },
+          "numero": {
+            "type": "string",
+            "description": "Número do cliente",
+            "example": "123"
+          },
+          "bairro": {
+            "type": "string",
+            "description": "Bairro do cliente",
+            "example": "Bairro Teste"
+          },
+          "cidade": {
+            "type": "string",
+            "description": "Cidade do cliente",
+            "example": "Cidade Teste"
+          },
+          "estado": {
+            "type": "string",
+            "description": "Estado do cliente",
+            "example": "Estado Teste"
+          }
+        },
+        "required": [
+          "name",
+          "email",
+          "cpf"
+        ]
+      },
+      "Error400": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Error message for code 400"
+          }
+        },
+        "example": {
+          "message": "Invalid request"
+        }
+      },
+      "Error401": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Error message for code 401"
+          }
+        },
+        "example": {
+          "message": "Not authorized"
+        }
+      },
+      "Error404": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Error message for code 404"
+          }
+        },
+        "example": {
+          "message": "Resource not found"
+        }
+      },
+      "Error409": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Error message for code 409"
+          }
+        },
+        "example": {
+          "message": "Data conflict"
+        }
+      },
+      "Error500": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Internal server error"
+          }
+        },
+        "example": {
+          "message": "Internal server error"
+        }
+      }
+    },
+    "securitySchemes": {
+      "Token": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
