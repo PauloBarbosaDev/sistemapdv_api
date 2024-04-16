@@ -1,5 +1,5 @@
-import { Request, Response } from 'express';
-import { categoryService } from '../services/categoryService';
+import { Request, Response } from "express";
+import { categoryService } from "../services/categoryService";
 
 export const categoriesController = {
   create: async (req: Request, res: Response) => {
@@ -65,9 +65,15 @@ export const categoriesController = {
 
   getAllCategories: async (req: Request, res: Response) => {
     try {
-      const categories = await categoryService.findAllCategories();
+      const page = parseInt(req.query.page as string) || 1;
+      const pageSize = parseInt(req.query.pageSize as string) || 10;
 
-      return res.status(200).json(categories);
+      const categories = await categoryService.findAllCategories(
+        page,
+        pageSize
+      );
+
+      return res.status(200).json({ categories, page, pageSize });
     } catch (error) {
       if (error instanceof Error) {
         return res.status(400).json({ message: error.message });
