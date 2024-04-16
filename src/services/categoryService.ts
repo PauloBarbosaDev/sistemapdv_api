@@ -1,6 +1,6 @@
-import { Category } from '../models';
-import { CategoryCreationAttributes } from '../models/Category';
-import { Product } from '../models/Product';
+import { Category } from "../models";
+import { CategoryCreationAttributes } from "../models/Category";
+import { Product } from "../models/Product";
 
 export const categoryService = {
   save: async (category: CategoryCreationAttributes) => {
@@ -25,8 +25,13 @@ export const categoryService = {
     return await Category.destroy({ where: { id } });
   },
 
-  findAllCategories: async () => {
-    const categories = await Category.findAll({ order: [['id', 'ASC']] });
+  findAllCategories: async (page: number, pageSize: number) => {
+    const offset = (page - 1) * pageSize;
+    const categories = await Category.findAll({
+      offset,
+      limit: pageSize,
+      order: [["id", "ASC"]],
+    });
 
     return categories;
   },
