@@ -1,8 +1,8 @@
-import { Request, Response } from 'express';
-import { AuthenticatedRequest } from '../middlewares/auth';
-import { productService } from '../services/productService';
-import { categoryService } from '../services/categoryService';
-import { orderProductsService } from '../services/orderProductsService';
+import { Request, Response } from "express";
+import { AuthenticatedRequest } from "../middlewares/auth";
+import { productService } from "../services/productService";
+import { categoryService } from "../services/categoryService";
+import { orderProductsService } from "../services/orderProductsService";
 
 export const productController = {
   getProductById: async (req: Request, res: Response) => {
@@ -24,6 +24,9 @@ export const productController = {
     }
   },
   getAllProducts: async (req: Request, res: Response) => {
+    const page = parseInt(req.query.page as string) || 1;
+    const pageSize = parseInt(req.query.pageSize as string) || 10;
+
     const { category_id } = req.query;
     try {
       if (category_id) {
@@ -40,7 +43,7 @@ export const productController = {
         return res.status(200).json(products);
       }
 
-      const products = await productService.findAllProducts();
+      const products = await productService.findAllProducts(page, pageSize);
 
       return res.status(200).json(products);
     } catch (error) {
