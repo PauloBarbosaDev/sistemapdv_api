@@ -1,24 +1,29 @@
-import { Order, OrderProducts } from '../models';
-import { Customer, CustomerCreationAttributes } from '../models/Customer';
+import { Order, OrderProducts } from "../models";
+import { Customer, CustomerCreationAttributes } from "../models/Customer";
 
 export const customerService = {
   getOrdersByCustomerId: async (customer_id: string | number) => {
     const orders = await Order.findAll({
       where: { customer_id },
-      attributes: ['id', 'total_value', 'observation', 'customer_id'],
+      attributes: ["id", "total_value", "observation", "customer_id"],
       include: [
         {
           model: OrderProducts,
-          attributes: ['id', 'quantity', 'value', 'order_id', 'product_id'],
+          attributes: ["id", "quantity", "value", "order_id", "product_id"],
         },
       ],
-      order: [['id', 'ASC']],
+      order: [["id", "ASC"]],
     });
     return orders;
   },
 
-  findAllCustomers: async () => {
-    const customers = await Customer.findAll({ order: [['id', 'ASC']] });
+  findAllCustomers: async (page: number, pageSize: number) => {
+    const offset = (page - 1) * pageSize;
+    const customers = await Customer.findAll({
+      offset,
+      limit: pageSize,
+      order: [["id", "ASC"]],
+    });
 
     return customers;
   },
