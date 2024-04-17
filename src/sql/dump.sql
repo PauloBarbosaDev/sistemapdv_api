@@ -1,7 +1,7 @@
 create table users (
   id serial primary key,
   name text not null,
-  email text not null,
+  email text UNIQUE not null,
   password text not null
  );
 
