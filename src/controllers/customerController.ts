@@ -1,5 +1,5 @@
-import { Request, Response } from 'express';
-import { customerService } from '../services/customerService';
+import { Request, Response } from "express";
+import { customerService } from "../services/customerService";
 
 export const customerController = {
   create: async (req: Request, res: Response) => {
@@ -85,7 +85,10 @@ export const customerController = {
   },
   getAllCustomers: async (req: Request, res: Response) => {
     try {
-      const customers = await customerService.findAllCustomers();
+      const page = parseInt(req.query.page as string) || 1;
+      const pageSize = parseInt(req.query.pageSize as string) || 10;
+
+      const customers = await customerService.findAllCustomers(page, pageSize);
 
       return res.status(200).json(customers);
     } catch (error) {
