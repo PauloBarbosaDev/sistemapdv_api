@@ -1,8 +1,13 @@
-import { Product, ProductCreationAttributes } from '../models/Product';
+import { Product, ProductCreationAttributes } from "../models/Product";
 
 export const productService = {
-  findAllProducts: async () => {
-    const products = await Product.findAll({ order: [['id', 'ASC']] });
+  findAllProducts: async (page: number, pageSize: number) => {
+    const offset = (page - 1) * pageSize;
+    const products = await Product.findAll({
+      offset,
+      limit: pageSize,
+      order: [["id", "ASC"]],
+    });
 
     return products;
   },
