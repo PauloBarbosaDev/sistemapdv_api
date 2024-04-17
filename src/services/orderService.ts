@@ -1,5 +1,5 @@
-import { OrderProducts, Product } from '../models';
-import { Order, OrderCreationAttributes } from '../models/Order';
+import { OrderProducts, Product } from "../models";
+import { Order, OrderCreationAttributes } from "../models/Order";
 
 export const orderService = {
   save: async (order: OrderCreationAttributes) => {
@@ -7,16 +7,19 @@ export const orderService = {
 
     return newOrder;
   },
-  findAllOrders: async () => {
+  findAllOrders: async (page: number, pageSize: number) => {
+    const offset = (page - 1) * pageSize;
     const orders = await Order.findAll({
-      attributes: ['id', 'total_value', 'observation', 'customer_id'],
+      attributes: ["id", "total_value", "observation", "customer_id"],
       include: [
         {
           model: OrderProducts,
-          attributes: ['id', 'quantity', 'value', 'order_id', 'product_id'],
+          attributes: ["id", "quantity", "value", "order_id", "product_id"],
         },
       ],
-      order: [['id', 'ASC']],
+      offset,
+      limit: pageSize,
+      order: [["id", "ASC"]],
     });
     return orders;
   },

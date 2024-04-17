@@ -1,11 +1,11 @@
-import { Request, Response } from 'express';
-import { customerService } from '../services/customerService';
-import { productService } from '../services/productService';
-import { orderService } from '../services/orderService';
-import { orderProductsService } from '../services/orderProductsService';
-import { emailService } from '../services/emailService';
-import path = require('path');
-import { htmlCompiler } from '../utils/htmlCompiler';
+import { Request, Response } from "express";
+import { customerService } from "../services/customerService";
+import { productService } from "../services/productService";
+import { orderService } from "../services/orderService";
+import { orderProductsService } from "../services/orderProductsService";
+import { emailService } from "../services/emailService";
+import path = require("path");
+import { htmlCompiler } from "../utils/htmlCompiler";
 
 type OrderRequestProductsAttributes = {
   product_id: number;
@@ -65,7 +65,7 @@ export const orderController = {
         });
       }
 
-      const htmlPath = path.join(__dirname, '../template/email.html');
+      const htmlPath = path.join(__dirname, "../template/email.html");
       const html = await htmlCompiler(htmlPath, {
         name: customerExist.name,
         emailName: process.env.EMAIL_NAME,
@@ -74,7 +74,7 @@ export const orderController = {
 
       emailService.sendEmail(
         `${customerExist.name} <${customerExist.email}>`,
-        'Cofirmação de conclusão de pedido',
+        "Cofirmação de conclusão de pedido",
         html
       );
 
@@ -86,6 +86,8 @@ export const orderController = {
     }
   },
   getAllOrders: async (req: Request, res: Response) => {
+    const page = parseInt(req.query.page as string) || 1;
+    const pageSize = parseInt(req.query.pageSize as string) || 10;
     const { customer_id } = req.query;
 
     try {
@@ -103,7 +105,7 @@ export const orderController = {
         return res.status(200).json(orders);
       }
 
-      const order = await orderService.findAllOrders();
+      const order = await orderService.findAllOrders(page, pageSize);
 
       return res.status(200).json(order);
     } catch (error) {
