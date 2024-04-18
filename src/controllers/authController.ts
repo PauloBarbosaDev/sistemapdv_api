@@ -1,6 +1,6 @@
-import { userService } from '../services/userService';
-import { Request, Response } from 'express';
-import { jwtService } from '../services/jwtServices';
+import { userService } from "../services/userService";
+import { Request, Response } from "express";
+import { jwtService } from "../services/jwtServices";
 
 export const authController = {
   register: async (req: Request, res: Response) => {
@@ -10,7 +10,9 @@ export const authController = {
       const userAlreadyExists = await userService.findByEmail(email);
 
       if (userAlreadyExists) {
-        return res.status(400).json({ message: `Email is already in use.` });
+        return res
+          .status(401)
+          .json({ message: `invalid email and/or password` });
       }
 
       const user = await userService.create({ name, email, password });
@@ -46,7 +48,7 @@ export const authController = {
 
         const token = jwtService.generateToken(
           payLoad,
-          process.env.JWT_EXPIRES || '1d'
+          process.env.JWT_EXPIRES || "1d"
         );
 
         return res.status(200).json({ authenticated: true, ...payLoad, token });
