@@ -19,8 +19,8 @@ const loginUser = async (user: LoginUserTestParams) => {
 describe("Login User Controller", () => {
   beforeEach(() => {
     logedUser = {
-      email: "pauloBarbosa@gmail.com",
-      password: "12345678",
+      email: "paulobarbosa@gmail.com",
+      password: "paulob12345",
     };
   });
 
