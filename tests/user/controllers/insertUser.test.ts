@@ -66,6 +66,15 @@ describe("Create User Controller", () => {
     expect(response.body).toEqual({ mensagem: "name is a required field" });
   });
 
+  it("Should not be able to create a new user without a email", async () => {
+    user.email = null;
+
+    await createUser(user);
+
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual({ mensagem: "email is a required field" });
+  });
+
   it("Should not be able to create a new user without a password", async () => {
     user.password = null;
 
