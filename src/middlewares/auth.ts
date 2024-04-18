@@ -1,8 +1,13 @@
-import { NextFunction, Request, Response } from 'express';
-import { UserInstance } from '../models/User';
-import { jwtService } from '../services/jwtServices';
-import { userService } from '../services/userService';
-import { JwtPayload } from 'jsonwebtoken';
+import { NextFunction, Request, Response } from "express";
+import { UserInstance } from "../models/User";
+import { jwtService } from "../services/jwtServices";
+import { userService } from "../services/userService";
+import { JwtPayload } from "jsonwebtoken";
+
+export interface LoginUserParams {
+  email: string;
+  password: string;
+}
 
 export interface AuthenticatedRequest extends Request {
   user?: UserInstance | null;
@@ -19,10 +24,10 @@ export function ensureAuth(
     return res.status(401).json({ message: `Unauthorized: no token found` });
   }
 
-  const token = authorizationHeader.replace(/Bearer /, '');
+  const token = authorizationHeader.replace(/Bearer /, "");
 
   jwtService.verifyToken(token, async (err, decoded) => {
-    if (err || typeof decoded === 'undefined') {
+    if (err || typeof decoded === "undefined") {
       return res.status(401).json({ message: `Unauthorized: invalid token` });
     }
 

@@ -1,6 +1,6 @@
-import { Response } from 'express';
-import { AuthenticatedRequest } from '../middlewares/auth';
-import { userService } from '../services/userService';
+import { Response } from "express";
+import { AuthenticatedRequest } from "../middlewares/auth";
+import { userService } from "../services/userService";
 
 export const usersController = {
   getuserDetail: async (req: AuthenticatedRequest, res: Response) => {
@@ -15,9 +15,10 @@ export const usersController = {
   },
 
   update: async (req: AuthenticatedRequest, res: Response) => {
-    const { id } = req.user!;
-    const { name, email } = req.body;
     try {
+      const { id } = req.user!;
+      const { name, email } = req.body;
+
       const user = await userService.findByEmail(email);
 
       if (user) {
