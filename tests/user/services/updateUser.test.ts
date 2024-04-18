@@ -24,7 +24,7 @@ describe("Update user", () => {
     const editedUser = await userService.update(user.id, editedUserData);
 
     expect(editedUser).toHaveProperty("id");
-    expect(editedUser).toHaveProperty("name");
+    expect(editedUser).toHaveProperty("name", editedUser.name);
     expect(editedUser).toHaveProperty("email", editedUser.email);
   });
 
