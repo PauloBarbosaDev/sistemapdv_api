@@ -10,7 +10,7 @@ describe("Update user", () => {
     const userData: UserCreationAttributes = {
       name: "Test Name",
       email: "paulobarbosa@testnovo.com.br",
-      password: "123456",
+      password: "12345678",
     };
 
     const editedUserData: UserCreationAttributes = {
@@ -32,7 +32,7 @@ describe("Update user", () => {
     const userData: UserCreationAttributes = {
       name: "Test Name",
       email: "paulobarbosa@testnovo.com.br",
-      password: "123456",
+      password: "12345678",
     };
     await userService.create(userData);
 

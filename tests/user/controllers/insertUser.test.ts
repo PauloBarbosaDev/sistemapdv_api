@@ -37,6 +37,17 @@ describe("Create User Controller", () => {
     expect(response.body).toHaveProperty("email", user.email);
   });
 
+  it("Password must be at least 8 characters ", async () => {
+    user.password = "123456";
+
+    await createUser(user);
+
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual({
+      mensagem: "password must be at least 8 characters",
+    });
+  });
+
   it("Email must be a valid email", async () => {
     user.email = "paulob@";
 
@@ -46,7 +57,7 @@ describe("Create User Controller", () => {
     expect(response.body).toEqual({ mensagem: "email must be a valid email" });
   });
 
-  it("Some request field missing", async () => {
+  it("Should not be able to create a new user without a password", async () => {
     user.password = null;
 
     await createUser(user);
