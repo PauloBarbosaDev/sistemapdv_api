@@ -22,7 +22,7 @@ export const usersController = {
       const user = await userService.findByEmail(email);
 
       if (user) {
-        return res.status(400).json({ message: `Email is already in use.` });
+        return res.status(409).json({ message: `Email is already in use.` });
       }
 
       const updateUser = await userService.update(id, {

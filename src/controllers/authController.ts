@@ -11,7 +11,7 @@ export const authController = {
 
       if (userAlreadyExists) {
         return res
-          .status(401)
+          .status(409)
           .json({ message: `invalid email and/or password` });
       }
 
