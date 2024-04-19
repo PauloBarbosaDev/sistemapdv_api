@@ -21,10 +21,13 @@ const updateUser = async (
   userId: number | undefined,
   user: UpdateUserTestParams
 ) => {
-  response = await request(app)
-    .put(`/user/${userId}`)
-    .set("Authorization", `Bearer ${token}`)
-    .send(user);
+  let requestBuilder = request(app).put(`/user/${userId}`);
+
+  if (token) {
+    requestBuilder = requestBuilder.set("Authorization", `Bearer ${token}`);
+  }
+
+  response = await requestBuilder.send(user);
 
   return response;
 };
@@ -83,6 +86,18 @@ describe("Update User Controller", () => {
     expect(response.body).toHaveProperty(
       "mensagem",
       "email must be a valid email"
+    );
+  });
+
+  it("Jwt no token found", async () => {
+    let errorToken;
+
+    await updateUser(errorToken, userIdTest, updatedUser);
+
+    expect(response.status).toBe(401);
+    expect(response.body).toHaveProperty(
+      "message",
+      "Unauthorized: no token found"
     );
   });
 });
