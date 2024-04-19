@@ -113,4 +113,31 @@ describe("Update User Controller", () => {
       "Unauthorized: no token found"
     );
   });
+
+  it("Should not be able to update a user without a name", async () => {
+    updatedUser.name = null;
+
+    await updateUser(bearerTokenTest, userIdTest, updatedUser);
+
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual({ mensagem: "name is a required field" });
+  });
+
+  it("Should not be able to create a new user without a email", async () => {
+    updatedUser.email = null;
+
+    await updateUser(bearerTokenTest, userIdTest, updatedUser);
+
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual({ mensagem: "email is a required field" });
+  });
+
+  it("Should not be able to create a new user without a password", async () => {
+    updatedUser.password = null;
+
+    await updateUser(bearerTokenTest, userIdTest, updatedUser);
+
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual({ mensagem: "password is a required field" });
+  });
 });
