@@ -23,7 +23,7 @@ describe("Create User Controller", () => {
 
     user = {
       name: "Paulo Barbosa",
-      email: "paulo_barbosa_9333@outlook.com",
+      email: "paulobarbosa@teste.com",
       password: "testeNewUser",
     };
   });
@@ -35,6 +35,18 @@ describe("Create User Controller", () => {
     expect(response.body).toHaveProperty("id");
     expect(response.body).toHaveProperty("name", user.name);
     expect(response.body).toHaveProperty("email", user.email);
+  });
+
+  it("Should not be able to create a new user with an email already in use", async () => {
+    await createUser(user);
+
+    await createUser(user);
+
+    expect(response.status).toBe(409);
+    expect(response.body).toHaveProperty(
+      "message",
+      "invalid email and/or password"
+    );
   });
 
   it("Password must be at least 8 characters ", async () => {

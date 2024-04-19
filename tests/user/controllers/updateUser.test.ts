@@ -64,4 +64,16 @@ describe("Update User Controller", () => {
       "password must be at least 8 characters"
     );
   });
+
+  it("Email must be a valid email", async () => {
+    updatedUser.email = "Paulobarbosa@";
+
+    await updateUser(bearerTokenTest, userIdTest, updatedUser);
+
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty(
+      "mensagem",
+      "email must be a valid email"
+    );
+  });
 });
