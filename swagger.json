@@ -33,6 +33,9 @@
     },
     {
       "name": "Customer"
+    },
+    {
+      "name": "Order"
     }
   ],
   "paths": {
@@ -1121,6 +1124,157 @@
           }
         }
       }
+    },
+    "/order": {
+      "post": {
+        "summary": "Register Order",
+        "tags": [
+          "Order"
+        ],
+        "description": "This endpoint allows you to register a order in the application.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderBody"
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "customer_id": "1",
+                    "observation": "observation text",
+                    "order_products": [
+                      {
+                        "product_id": "5",
+                        "quantity": 2
+                      }
+                    ]
+                  }
+                },
+                "Example 2": {
+                  "value": {
+                    "customer_id": "4",
+                    "observation": "observation text",
+                    "order_products": [
+                      {
+                        "product_id": "1",
+                        "quantity": 5
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful create order",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "List Orders",
+        "tags": [
+          "Order"
+        ],
+        "description": "This endpoint allows you to list all orders registered in the application.",
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1424,6 +1578,64 @@
           "name",
           "email",
           "cpf"
+        ]
+      },
+      "OrderBody": {
+        "type": "object",
+        "properties": {
+          "customer_id": {
+            "type": "number",
+            "description": "Customer ID",
+            "example": "customer_id 1"
+          },
+          "observation": {
+            "type": "string",
+            "description": "Order observation",
+            "example": "observation text"
+          },
+          "order_products": {
+            "type": "array",
+            "description": "Order product list",
+            "example": [
+              {
+                "product_id": "1",
+                "quantity": "2"
+              }
+            ]
+          }
+        },
+        "required": [
+          "customer_id",
+          "order_products"
+        ]
+      },
+      "OrderResponse": {
+        "type": "object",
+        "properties": {
+          "customer_id": {
+            "type": "number",
+            "description": "Customer ID",
+            "example": "customer_id 1"
+          },
+          "observation": {
+            "type": "string",
+            "description": "Order observation",
+            "example": "observation text"
+          },
+          "order_products": {
+            "type": "array",
+            "description": "Order product list",
+            "example": [
+              {
+                "product_id": "1",
+                "quantity": "2"
+              }
+            ]
+          }
+        },
+        "required": [
+          "customer_id",
+          "order_products"
         ]
       },
       "Error400": {
