@@ -47,11 +47,21 @@ describe("Update User Controller", () => {
   it("Update a user successfully", async () => {
     await updateUser(bearerTokenTest, userIdTest, updatedUser);
 
-    console.log(response.body);
-    console.log(response.statusCode);
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty("id");
     expect(response.body).toHaveProperty("name");
     expect(response.body).toHaveProperty("email", updatedUser.email);
+  });
+
+  it("Password must be at least 8 characters", async () => {
+    updatedUser.password = "123456";
+
+    await updateUser(bearerTokenTest, userIdTest, updatedUser);
+
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty(
+      "mensagem",
+      "password must be at least 8 characters"
+    );
   });
 });

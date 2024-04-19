@@ -40,7 +40,12 @@ router.get("/categories", ensureAuth, categoriesController.getAllCategories);
 
 router.get("/user", ensureAuth, usersController.getuserDetail);
 
-router.put("/user/:id", ensureAuth, usersController.update);
+router.put(
+  "/user/:id",
+  ensureAuth,
+  validationBody(userSchema),
+  usersController.update
+);
 
 router.put("/user/password", ensureAuth, usersController.updatePassword);
 
