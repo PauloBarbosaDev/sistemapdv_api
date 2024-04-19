@@ -53,6 +53,15 @@ describe("Update User Controller", () => {
     expect(response.body).toHaveProperty("email", updatedUser.email);
   });
 
+  it("Should not be able to create a new user with an email already in use", async () => {
+    updatedUser.email = "paulobarbosa@gmail.com";
+
+    await updateUser(bearerTokenTest, userIdTest, updatedUser);
+
+    expect(response.status).toBe(409);
+    expect(response.body).toHaveProperty("message", "Email is already in use.");
+  });
+
   it("Password must be at least 8 characters", async () => {
     updatedUser.password = "123456";
 
