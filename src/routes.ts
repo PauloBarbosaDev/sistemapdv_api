@@ -47,6 +47,8 @@ router.put(
   usersController.update
 );
 
+router.delete("/user/:id", ensureAuth, usersController.delete);
+
 router.put("/user/password", ensureAuth, usersController.updatePassword);
 
 router.post(

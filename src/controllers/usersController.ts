@@ -64,4 +64,23 @@ export const usersController = {
       }
     }
   },
+  delete: async (req: AuthenticatedRequest, res: Response) => {
+    const userId = +req.params.id;
+
+    try {
+      const userExist = userService.findById(userId);
+
+      if (!userExist) {
+        return res.status(404).json({ message: `User ${userId} not found` });
+      }
+
+      await userService.deleteUserById(userId);
+
+      return res.status(204).send();
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(400).json({ message: error.message });
+      }
+    }
+  },
 };
