@@ -1,10 +1,15 @@
-import { User, UserCreationAttributes } from '../models/User';
+import { User, UserCreationAttributes } from "../models/User";
 
 export const userService = {
   create: async (user: UserCreationAttributes) => {
     const newUser = await User.create(user);
 
     return newUser;
+  },
+  findById: async (id: number | string) => {
+    const user = await User.findByPk(id);
+
+    return user;
   },
   findByEmail: async (email: string) => {
     const user = await User.findOne({
@@ -41,5 +46,8 @@ export const userService = {
     );
 
     return updatedUsers[0];
+  },
+  deleteUserById: async (id: number | string) => {
+    return await User.destroy({ where: { id } });
   },
 };
