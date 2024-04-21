@@ -47,4 +47,16 @@ describe("Detail user controller", () => {
       "Unauthorized: invalid token"
     );
   });
+
+  it("Jwt no token found", async () => {
+    let errorToken;
+
+    await detailUser(errorToken);
+
+    expect(response.status).toBe(401);
+    expect(response.body).toHaveProperty(
+      "message",
+      "Unauthorized: no token found"
+    );
+  });
 });
