@@ -34,4 +34,17 @@ describe("Detail user controller", () => {
     expect(response.body).toHaveProperty("name", user.name);
     expect(response.body).toHaveProperty("email", user.email);
   });
+
+  it("Invalid token", async () => {
+    const errorToken =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OTYwLCJuYW1lIjoiUGF1bG8gYmFyYm9zYSIsImVtYWlsIjoidGVzdGUyQGhvdG1hYWlsLmNvbSIsImlhdCI6MTcxMzQ5NjUyNywiZXhwIjoxNzEzNTgyOTI3fQ.8D4VgSH41zSiXH66OxId5by3fthLbvsxpFY02dtB";
+
+    await detailUser(errorToken);
+
+    expect(response.status).toBe(401);
+    expect(response.body).toHaveProperty(
+      "message",
+      "Unauthorized: invalid token"
+    );
+  });
 });
