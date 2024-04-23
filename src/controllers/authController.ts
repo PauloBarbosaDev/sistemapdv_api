@@ -15,7 +15,7 @@ export const authController = {
           .json({ message: `invalid email and/or password` });
       }
 
-      const user = await userService.create({ name, email, password });
+      const user = await userService.save({ name, email, password });
       return res.status(201).json(user);
     } catch (error) {
       if (error instanceof Error) {
