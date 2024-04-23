@@ -1,7 +1,7 @@
 import { User, UserCreationAttributes } from "../models/User";
 
 export const userService = {
-  create: async (user: UserCreationAttributes) => {
+  save: async (user: UserCreationAttributes) => {
     const newUser = await User.create(user);
 
     return newUser;
