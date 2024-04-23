@@ -19,7 +19,7 @@ describe("Update user", () => {
       password: "12345962test",
     };
 
-    const user = await userService.create(userData);
+    const user = await userService.save(userData);
 
     const editedUser = await userService.update(user.id, editedUserData);
 
@@ -34,9 +34,9 @@ describe("Update user", () => {
       email: "paulobarbosa@testnovo.com.br",
       password: "12345678",
     };
-    await userService.create(userData);
+    await userService.save(userData);
 
-    await expect(userService.create(userData)).rejects.toEqual(
+    await expect(userService.save(userData)).rejects.toEqual(
       new Error("Validation error")
     );
   });
