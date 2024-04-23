@@ -30,7 +30,7 @@ export const productController = {
     const { category_id } = req.query;
     try {
       if (category_id) {
-        const products = await categoryService.getProductsByCategoryId(
+        const products = await categoryService.findProductsByCategoryId(
           +category_id
         );
 
