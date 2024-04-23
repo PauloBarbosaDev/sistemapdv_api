@@ -14,7 +14,7 @@ describe("Delete user", () => {
       password: "12345678",
     };
 
-    await userService.create(userData);
+    await userService.save(userData);
 
     const deletionResult = await userService.deleteUserById(userData.id!);
     expect(deletionResult).toBe(1);
