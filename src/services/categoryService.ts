@@ -40,7 +40,7 @@ export const categoryService = {
 
     return category;
   },
-  getProductsByCategoryId: async (category_id: string | number) => {
+  findProductsByCategoryId: async (category_id: string | number) => {
     const products = await Product.findAll({ where: { category_id } });
 
     return products;
