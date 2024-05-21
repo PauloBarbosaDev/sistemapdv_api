@@ -38,6 +38,12 @@ router.get("/categories/:id", ensureAuth, categoriesController.getCategoryById);
 
 router.get("/categories", ensureAuth, categoriesController.getAllCategories);
 
+router.get(
+  "/categories/:id/products",
+  ensureAuth,
+  categoriesController.getProductsByCategoryId
+);
+
 router.get("/user", ensureAuth, usersController.getuserDetail);
 
 router.put(

@@ -90,7 +90,32 @@ export const categoriesController = {
           .status(404)
           .json({ message: `Category ${categoryId} not found` });
 
-      return res.status(200).json(category);
+      const products = categoryService.findProductsByCategoryId(categoryId);
+
+      return res.status(200).json(products);
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(400).json({ message: error.message });
+      }
+    }
+  },
+  getProductsByCategoryId: async (req: Request, res: Response) => {
+    const categoryId = req.params.id;
+
+    try {
+      const category = await categoryService.findCategoryById(categoryId);
+
+      if (!category) {
+        return res
+          .status(404)
+          .json({ message: `Category ${categoryId} not found` });
+      }
+
+      const products = await categoryService.findProductsByCategoryId(
+        categoryId
+      );
+
+      return res.status(200).json(products);
     } catch (error) {
       if (error instanceof Error) {
         return res.status(400).json({ message: error.message });
