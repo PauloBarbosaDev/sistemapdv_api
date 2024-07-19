@@ -90,9 +90,7 @@ export const categoriesController = {
           .status(404)
           .json({ message: `Category ${categoryId} not found` });
 
-      const products = categoryService.findProductsByCategoryId(categoryId);
-
-      return res.status(200).json(products);
+      return res.status(200).json(category);
     } catch (error) {
       if (error instanceof Error) {
         return res.status(400).json({ message: error.message });
